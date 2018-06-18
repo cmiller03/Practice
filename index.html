@@ -1,27 +1,89 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Practicing with GIMP</title>
+        <title>An interactive web page</title>
         <style>
-            #pictureframe {position: relative;}
-            #trophy {position: absolute; left: 350px; top: 200px;}
+            #color_box {width: 200px; height: 200px;}
+            .gray {background: gray;}
+            .blue {background: rgb(67, 111, 255);}
+            .pink {background: pink;}
         </style>
     </head>
     <body>
-        <h1>Cat with Trophy, 2018</h1>
-        <div id="pictureframe">
-            <img src="cat.jpg" width="600">
-            <img id="trophy" src="trophy.png" width="150">
-            <img src="tissue.png" width="400">
-        </div>
+        <h1>An interactive web page</h1>
 
-        <h2>Instructions</h2>
-        
-        <ol>
-            <li>Edit the image of the trophy to make the white background transparent.</li>
-            <li>Resize the trophy image to 150 pixels wide, and save it as a PNG.</li>
-            <li>Resize the photo of the cat to be 600 pixels wide, and save it as a JPG with quality 80.</li>
-            <li>Update the HTML above to use the modified images.</li>
-        </ol>
+        <h2>1. Color changer</h2>
+        <button id="gray_button">Gray</button>
+        <button id="blue_button">Blue</button>
+        <button id="pink_button">Pink</button>
+        <div id="color_box" class="gray"></div>        
+        <script>
+            const gray_button = document.getElementById("gray_button");
+            const blue_button = document.getElementById("blue_button");
+            const pink_button = document.getElementById("pink_button");
+            const color_box = document.getElementById("color_box");
+            gray_button.onclick = function() {
+                color_box.className = "gray";
+            };
+            blue_button.onclick = function () {
+                color_box.className = "blue";
+            }
+            pink_button.onclick = function() {
+                color_box.className = "pink";
+            }
+            /* TODO 1
+             *
+             * Add a third button (and the associated event handler)
+             * to support an additional color: pink
+             */
+        </script>
+
+        <hr>
+
+        <h2>2. Counter</h2>
+        <button id="counter_button">This fabulous button</button>
+        has been clicked <span id="countspan">0</span> times.
+        <script>
+            var count=0;
+            const counter_button = document.getElementById("counter_button");
+            const countspan = document.getElementById("countspan");
+            counter_button.onclick = function() {
+                var countspan = document.querySelector('span');
+                countspan.textContent = count+1; count++;
+                /* TODO 2
+                 *
+                 * Fill in this function so that it increments
+                 * (adds one to) the variable named count,
+                 * then updates the text content of "countspan"
+                 * to show the current value of "count".
+                 */
+            }
+        </script>
+
+        <hr>
+
+        <h2>3. Even or Odd?</h2>
+        <button id="even_or_odd_button">Is the count even or odd?</button>
+        <h3> </h3>
+        <script>
+            const even_or_odd_button = document.getElementById("even_or_odd_button");
+            even_or_odd_button.onclick = function() {
+                var remainder=count%2
+                if (remainder === 1) {
+                    var myHeading = document.querySelector('h3');
+                     myHeading.textContent = 'Odd';
+                }
+                if (remainder === 0) {
+                    var myHeading = document.querySelector('h3');
+                    myHeading.textContent = 'Even';
+                }
+            }
+                /* TODO 3
+                 *
+                 * Fill in this function so that it shows an
+                 * alert dialog stating whether the count
+                 * (from part 2, above) is even or odd.
+                 */
+        </script>
     </body>
 </html>
