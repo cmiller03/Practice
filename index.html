@@ -1,51 +1,54 @@
 <html>
-    <body>
-        <script>
-        function add(x,y) {
-            var a = x;
-            var b = y;
-            return a + b;
+    <head>
+    <style>
+    .bar {
+    background-color: blue;
+    margin: 10px;   
+    height: 20px;
+    color: white;
+    font-size: 10px;
+} 
+    </style>
+    </head>
+<body>
+    
+    <button id='roll_button'>Roll Dice</button>
+    <div id='results'></div>
+    <script>
+    const roll_button = document.getElementById("roll_button");
+    roll_button.onclick = function() {
+        rolls = ['', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] 
+        genNum();
+    }
+    var rolls = ['', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    function rollNum() {
+    var and12 = 1 + Math.floor(Math.random() * 6);
+    return and12;
+    }
+    function genNum() {
+    
+        for(var i = 1; i <= 1000; i++) {
+            var number = rollNum() + rollNum();
+            rolls[number] += 1;
         }
+        document.getElementById('results').innerHTML = '';
+        for(var i = 2; i < rolls.length; i++) {
+            var div =  document.createElement("div");
+            div.textContent = i + ": " + rolls[i];
+            document.getElementById('results').appendChild(div);
+        }
+        for(var i = 2; i<rolls.length; i++) {
+        var newDiv = document.createElement("div")
+        newDiv.className = "bar";
+        newDiv.style = "width:" + rolls[i] + "px";
+        newDiv.textContent = i + ': ' + rolls[i];
+        document.getElementById('results').appendChild(newDiv);
+        }
+        return rolls
+    }
+    genNum();
+    
 
-        function multiply(x,y) {
-            var a = x;
-            var b = y;
-            var product = 0;
-            for(var i = 1; i <= a; i++) {
-                product = add(product,b);
-            }
-            return product;
-        }
-
-        function power(x,y) {
-            var a = x;
-            var b = y;
-            var product = 1;
-            for(var i = 1; i <= b; i++) {
-                product = multiply(product,a);
-            }
-            return product;
-        }
-        function factorial(x) {
-            var a = x;
-            var product =1;
-            for(var i = x; i >= 1; i--) {
-                product = multiply(product,i)
-                console.log(i)
-            }
-        return product;
-        }
-
-        function fibonacci(x) {
-            var fib = [0,1]
-            var place = 1;
-            for(var i = 1; i <= x; i++) {
-                place = add(fib[fib.length-1],fib[fib.length-2])
-                fib.push(place); 
-                console.log(place);
-            } 
-        return fib[x];
-        }
-        </script>
-    </body>
+    </script>
+</body>
 </html>
